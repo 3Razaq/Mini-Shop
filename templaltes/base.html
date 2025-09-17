@@ -1,8 +1,0 @@
-{% load static %}
-Mini Shop
-Home Categories Cart ({{ cart_count|default:0 }}) Wishlist ({{ wishlist_count|default:0 }}) Checkout Admin Login Signup
-{% if messages %}
-{% for message in messages %}
-{{ message }}
-{% endfor %}
-{% endif %} {% block content %}{% endblock %}

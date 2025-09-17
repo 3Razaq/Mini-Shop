@@ -1,0 +1,26 @@
+
+{% extends 'base.html' %}
+{% block content %}
+  <h2>Checkout</h2>
+  <div class="layout" style="grid-template-columns: 1fr 1fr;">
+    <div>
+      <h3>Shipping Info</h3>
+      <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-primary" type="submit">Place Order</button>
+      </form>
+    </div>
+    <div>
+      <h3>Order Summary</h3>
+      <ul>
+        {% for it in items %}
+          <li>{{ it.product.name }} × {{ it.quantity }} — ${{ it.subtotal }}</li>
+        {% endfor %}
+      </ul>
+      <h4>Total: ${{ total }}</h4>
+    </div>
+  </div>
+{% endblock %}
+
+

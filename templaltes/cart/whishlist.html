@@ -1,0 +1,22 @@
+
+{% extends 'base.html' %}
+{% block content %}
+  <h2>Your Wishlist</h2>
+  <div class="grid">
+    {% for p in products %}
+      <div class="card">
+        {% if p.image %}
+          <a href="{% url 'product_detail' p.slug %}"><img src="{{ p.image.url }}" alt="{{ p.name }}"></a>
+        {% endif %}
+        <h3><a href="{% url 'product_detail' p.slug %}">{{ p.name }}</a></h3>
+        <div class="price">${{ p.price }}</div>
+        <a class="btn" href="/wishlist/toggle/{{ p.id }}/">Remove</a>
+        <a class="btn btn-primary" href="/cart/add/{{ p.id }}/">Add to Cart</a>
+      </div>
+    {% empty %}
+      <p>No items yet. Browse products and add some!</p>
+    {% endfor %}
+  </div>
+{% endblock %}
+
+

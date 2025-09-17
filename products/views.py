@@ -1,8 +1,8 @@
-from django.shortcuts import render, get_object_or_404
-from django.db.models import Q
+from django.shortcuts import render, get_object_or_404, redirect
+from django.db.models import Q, Avg
 from django.core.paginator import Paginator
 from .models import Product, Category, Review
-from django import forms
+from .forms import ReviewForm
 
 
 def product_list(request):
@@ -46,27 +46,32 @@ def product_list(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
-    return render(request, 'products/product_list.html', {
+    context = {
         'page_obj': page_obj,
         'categories': categories,
-    })
+        'current_category': category_slug,
+        'query': query,
+        'min_price': min_price,
+        'max_price': max_price,
+        'sort': sort,
+    }
+
+    return render(request, 'products/product_list.html', context)
 
 
 def product_detail(request, slug):
     product = get_object_or_404(Product, slug=slug)
-    class ReviewForm(forms.ModelForm):
-        class Meta:
-            model = Review
-            fields = ['user_name', 'rating', 'comment']
-    avg_rating = product.reviews.all().aggregate(models.Avg('rating')).get('rating__avg')
+    avg_rating = product.reviews.all().aggregate(Avg('rating')).get('rating__avg')
     form = ReviewForm()
+
     if request.method == 'POST' and request.POST.get('action') == 'review':
         form = ReviewForm(request.POST)
         if form.is_valid():
             rv = form.save(commit=False)
             rv.product = product
             rv.save()
-            form = ReviewForm()
+            return redirect('product_detail', slug=product.slug)
+
     return render(request, 'products/product_detail.html', {
         'product': product,
         'avg_rating': avg_rating,
@@ -77,5 +82,3 @@ def product_detail(request, slug):
 def category_list(request):
     categories = Category.objects.all()
     return render(request, 'products/category_list.html', {'categories': categories})
-
-# Create your views here.

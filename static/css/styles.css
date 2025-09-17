@@ -1,0 +1,28 @@
+:root{--brand:#0a58ca;--bg:#0f172a;--muted:#64748b;--border:#e5e7eb;--card:#ffffff}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;background:#fafafa;color:#0f172a}
+.container{max-width:1280px;margin:0 auto;padding:24px}
+.header{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--border);z-index:10}
+.nav{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 24px}
+.brand{font-size:28px;font-weight:800}
+.nav a{margin-right:16px;color:var(--brand);text-decoration:none}
+.layout{display:grid;grid-template-columns:280px 1fr;gap:24px}
+.sidebar{background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px;height:max-content;position:sticky;top:84px}
+.content{min-height:60vh}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px}
+.card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px}
+.price{font-size:20px;font-weight:800}
+.btn{display:inline-block;padding:10px 14px;border:1px solid var(--brand);border-radius:10px;font-weight:600;transition:transform .08s ease, box-shadow .15s ease;text-decoration:none;color:var(--brand)}
+.btn-primary{background:var(--brand);color:#fff;border-color:var(--brand)}
+.btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(10,88,202,.15)}
+input,select{padding:10px 12px;border:1px solid var(--border);border-radius:10px}
+img{max-width:100%;height:auto;border-radius:10px;display:block}
+.table{width:100%;border-collapse:separate;border-spacing:0 8px}
+.table th,.table td{padding:12px 10px;background:#fff;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.table th:first-child,.table td:first-child{border-left:1px solid var(--border);border-top-left-radius:10px;border-bottom-left-radius:10px}
+.table th:last-child,.table td:last-child{border-right:1px solid var(--border);border-top-right-radius:10px;border-bottom-right-radius:10px}
+.badge{display:inline-block;padding:4px 8px;border-radius:999px;background:#eef2ff;color:#3730a3;font-size:12px;font-weight:700}
+.hero{background:linear-gradient(135deg,#eff6ff,#eef2ff);border:1px solid var(--border);border-radius:16px;padding:28px;margin:24px 0}
+.footer{margin-top:32px;color:var(--muted);font-size:14px}
+.footer hr{border:none;border-top:1px solid var(--border);margin:16px 0}
